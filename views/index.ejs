@@ -1,0 +1,101 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Star Wars Quote App</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">  </head>
+
+  <body>
+    <h1><center>May Node and Express be with you.</center></h1>
+
+    <center><img src="https://gettysburgsports.com/images/2014/4/14/Bullets_Homepage.jpg?preset=large.socialmediaimage" alt="Gettysburg College Football"></center>
+
+   <br>
+
+    <div class="form-group">
+        <h2> Add a player to the roster</h2>
+        <form action="/players" method="POST">
+        <input class="form-control form-control-lg" type="text" placeholder="First Name" name="FirstName" size="50" />
+        <br>
+        <input class="form-control form-control-lg" type="text" placeholder="Last Name" name="LastName" />
+        <br>
+        <!-- gYear is the graduation year. -->
+        <input class="form-control form-control-lg" type="number" placeholder="Graduation Year" name="GradYear" size="50" />
+        <br> 
+        <input class="form-control form-control-lg" type="text" placeholder="Position" name="Pos" size="50" />
+
+        <button type="submit" class="btn btn-primary" >Submit</button>
+        </form>
+    </div>
+
+    <h2> <center>Gettysburg College Football Roster  </center></h2>
+
+    <div class="form-group">
+        <form action = "/table" method = "POST">
+            <button type="submit" class="btn btn-primary" name= "type" value = "full">View Whole Roster</button>
+            <button type="submit" class="btn btn-primary" name= "type" value = "qb">View Quartberbacks</button>
+            <button type="submit" class="btn btn-primary" name= "type" value = "wr">View Wide Receivers</button>
+            <button type="submit" class="btn btn-primary" name= "type" value = "k">View Kickers</button>
+            <button type="submit" class="btn btn-primary" name= "type" value = "lb">View Linebackers</button>
+            <button type="submit" class="btn btn-primary" name= "type" value = "gy">Sort By Graduation Year (Ascending)</button>
+            <button type="submit" class="btn btn-primary" name= "type" value = "gyd">Sort By Graduation Year (Descending)</button>
+
+        </form>
+        </div>
+
+    <table class="table table-hover">
+        <thead>
+          <tr class = "table-dark">
+            <th scope="col">Name</th>
+            <th scope="col">Position</th>
+            <th scope="col">Graduation Year</th>
+          </tr>
+        </thead>
+        <tbody>
+            <ul class="players">
+                <% for(var i = 0; i < players.length; i++) {%>
+                    <tr class="table-default">
+                    <td><%= players[i].FirstName %> <%= players[i].LastName %></td>
+                    <td><%= players[i].Pos %></td>
+                    <td><%= players[i].GradYear %></td>
+                    </tr>
+                <% } %>
+            </ul>
+         
+        </tbody>
+      </table> 
+
+    <div>
+        <h2>Update a player's information</h2>
+        <p>
+          Change the position of a player. 
+        </p>
+        
+        
+        <form action="/update" method="POST">
+
+            <input type="text" placeholder="Player First Name" name="FirstName" id = "fname" />
+            <input type="text" placeholder="New position" name="Pos" id = "pos" />
+            <button id="update-button">Update player position</button>
+          </form>
+
+
+      </div>
+
+      <div>
+        <h2>Remove Darth Vadar!</h2>
+        <p>
+          Delete one Darth Vadar's quote. Does nothing if there are no more Darth
+          Vadar's quote
+        </p>
+        <button id="delete-button">Delete Darth Vadar's quote</button>
+      </div>
+      <div id="message"></div>
+      <script src="/main.js"></script>
+      
+  </body>
+
+  
+</html>

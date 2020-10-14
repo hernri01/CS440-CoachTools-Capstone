@@ -24,7 +24,7 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
         console.log('listening on 3000')
     })
 
-    // Reading something. Getting information
+    // Reading something. Getting information 
     app.get('/', (req, res) => //This is the same as function(req,res)
     {
         // Sorting by the position Alhpabetically.
@@ -33,11 +33,88 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
             res.render('index.ejs', {players: results})
         })
         .catch(error => console.error(error))
+
     })
 
+    app.post('/table', (req,res) => 
+    {
+        const type = req.body.type;
+
+        if(type == "wr")
+        {
+            rosterCollection.find( {"Pos" : "WR"}).toArray()
+            .then(results => {
+                res.render('index.ejs', {players: results})
+                res.redirect('/');
+            })
+            .catch(error => console.error(error))
+        }
+        else if(type == "qb")
+        {
+            rosterCollection.find( {"Pos" : "QB"}).toArray()
+            .then(results => {
+                res.render('index.ejs', {players: results})
+                res.redirect('/');
+            })
+            .catch(error => console.error(error))
+        }
+        else if(type == 'k')
+        {
+            rosterCollection.find( {"Pos" : "K"}).toArray()
+            .then(results => {
+                res.render('index.ejs', {players: results})
+                res.redirect('/');
+            })
+            .catch(error => console.error(error))
+        }
+        else if(type == 'lb')
+        {
+            rosterCollection.find( {"Pos" : "LB"}).toArray()
+            .then(results => {
+                res.render('index.ejs', {players: results})
+                res.redirect('/');
+            })
+            .catch(error => console.error(error))
+        }
+        else if( type == 'gy')
+        {
+            rosterCollection.find({ "GradYear": { "$exists": true } }).sort({'GradYear': 1}).toArray()
+            .then(results => {
+                res.render('index.ejs', {players: results})
+                res.redirect('/');
+            })
+            .catch(error => console.error(error))
+        }
+        else if(type == 'gyd')
+        {
+            rosterCollection.find({ "GradYear": { "$exists": true } }).sort({'GradYear': -1}).toArray()
+            .then(results => {
+                res.render('index.ejs', {players: results})
+                res.redirect('/');
+            })
+            .catch(error => console.error(error))
+        }
+        else
+        {
+            db.collection('Roster').find({ "Pos": { "$exists": true } }).sort({'Pos': 1}).toArray()
+            .then(results => {
+                res.render('index.ejs', {players: results})
+                res.redirect('/');
+            })
+            .catch(error => console.error(error))
+        }
+        console.log(req.body)
+    })
     //Adding a player
     app.post('/players', (req, res) => {
-        rosterCollection.insertOne(req.body)
+        const gYear = parseInt(req.body.GradYear) 
+        console.log(gYear)
+        rosterCollection.insert({
+            FirstName : req.body.FirstName,
+            LastName : req.body.LastName,
+            GradYear : gYear,
+            Pos : req.body.Pos
+        })
         .then(result => {
             res.redirect('/');
         })
@@ -45,16 +122,14 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
     })
 
 
-    // This method will update the roster of a specific player by typing it in.
+    // This method will update the roster of a specific player by typing it in. Eventually we want to update the table by possibly clicking on the table and changing it from there.
     app.post('/update', (req, res) => {
         const fName = req.body.FirstName;
-        const lname = req.body.LastName;
         const pos = req.body.Pos;
         
         console.log(req.body)
         console.log(fName)
         console.log(pos)
-        console.log(lname)
         rosterCollection.findOneAndUpdate(
             { "FirstName" : fName },
             { $set: { "Pos" : pos } }
