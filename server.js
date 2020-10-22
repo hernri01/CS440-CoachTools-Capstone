@@ -36,6 +36,41 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
 
     })
 
+    app.get('/home.html', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/home.html')
+    })
+
+    app.get('/coachHome.html', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/coachHome.html')
+    })
+
+    app.get('/playerHome.html', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/playerHome.html')
+    })
+
+    app.get('/player.html', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/player.html')
+    })
+
+    app.get('/login.html', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/login.html')
+    })
+
+    app.get('/coach.html', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/coach.html')
+    })
+
+    app.get('/coachToolsLogo.png', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/views/coachToolsLogo.png')
+    })
+
     app.post('/table', (req,res) => 
     {
         const type = req.body.type;
@@ -125,13 +160,14 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
     // This method will update the roster of a specific player by typing it in. Eventually we want to update the table by possibly clicking on the table and changing it from there.
     app.post('/update', (req, res) => {
         const fName = req.body.FirstName;
+        const lName = req.body.LastName;
         const pos = req.body.Pos;
         
         console.log(req.body)
         console.log(fName)
         console.log(pos)
         rosterCollection.findOneAndUpdate(
-            { "FirstName" : fName },
+            {"LastName" : lName},       //{ "FirstName" : fName }, 
             { $set: { "Pos" : pos } }
          )
         .then(result => {

@@ -1,0 +1,60 @@
+<!-- HTML components: form, input, text field, text area -->
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<TITLE>Player Login</TITLE>
+<style>
+    body {
+      background-color: aliceblue;
+    }
+    .btns {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .mybtn {
+        /* border: none; */
+        color:black; 
+        background-color: gray; 
+        border-color: gray;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .mybtn:hover {
+        background-color: grey;
+        color: white;
+    }
+
+    input[type=text], input[type=password], select {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+</HEAD>
+
+<BODY style="text-align: center;">
+<H1>Player Login Page</H1>
+<!-- login form -->
+<FORM name='login' method='POST' action='login_f.php'>
+<INPUT type='text' name='luser' size='30'
+       placeholder='Enter your username' /><BR /><BR />
+<INPUT type='password' name='lpass' size='30'
+       placeholder='Enter your password' /><BR /><BR />
+
+<INPUT type='submit' class="mybtn" value='Login' />
+</FORM>
+
+</BODY>
+</HTML>
