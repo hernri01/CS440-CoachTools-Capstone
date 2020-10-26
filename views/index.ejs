@@ -2,99 +2,268 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Required meta tags -->
     <meta charset="UTF-8" />
-    <title>Star Wars Quote App</title>
+    <!-- <title>Star Wars Quote App</title> -->
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">  </head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Coach Tools</title>
+    <!-- plugins:css -->
+    <!-- <link rel="stylesheet" href="../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css"> -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- <link rel="stylesheet" href="../vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../vendors/chartist/chartist.min.css"> -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <!-- End layout styles -->
+    <!-- <link rel="shortcut icon" href="../images/coachToolsLogo.png" /> -->
+    <style>
+    body {
+      background-color: aliceblue;
+    }
+    .sidenav {
+      height: 100%; /* Full-height: remove this if you want "auto" height */
+      width: 160px; /* Set the width of the sidebar */
+      position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+      /* z-index: -1; Stay on top */
+      top: 40px; /*Stay at the top */
+      left: 0;
+      background-color: #111; /* Black */
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 20px;
+    }
+    /* The navigation menu links */
+    .sidenav a, .dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+    .top-dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display:inline;
+      border: none;
+      background: none;
+      text-align: right;
+      cursor: pointer;
+      outline: none;
+    }
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover, .dropdown-btn:hover {
+      color: #f1f1f1;
+    }
+    .topnav {
+      position: fixed;
+      width: 100%;
+      height: fit-content;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      overflow: hidden;
+      background-color: #111;
+    }
+    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+      display: none;
+      background-color: #262626;
+      padding-left: 8px;
+    }
+    /* Optional: Style the caret down icon */
+    .fa-caret-down {
+      float: right;
+      padding-right: 8px;
+    }
+    /* Style page content */
+    .main {
+      margin-left: 160px; /* Same as the width of the sidebar */
+      padding: 0px 10px;
+    }
+    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+    .text, .text1 {
+      color: black;
+    }
+    .text ul:hover {
+      color: blue;
+    }
+    </style>
+    <!-- header -->
+    <div class="topnav">
+      <img src="coachToolsLogo.png" alt="CoachTools" style="display:inline; width: 75px;">
+      <div style="font-size: 25px; display: inline;">CoachTools</div>
+      <button class="top-dropdown-btn">Username</button>
+      <!-- <div class="dropdown-container">
+        <a href="login.html">Logout</a>
+      </div> -->
+      <div style="display: inline; text-align: right;">
+        <button class="top-dropdown-btn" onclick="window.location.href='login.html'">Logout</button>
+      </div>
+      
+    </div>
+  </head>
 
   <body>
-    <h1><center>May Node and Express be with you.</center></h1>
-
-    <center><img src="https://gettysburgsports.com/images/2014/4/14/Bullets_Homepage.jpg?preset=large.socialmediaimage" alt="Gettysburg College Football"></center>
-
-   <br>
-
-    <div class="form-group">
-        <h2> Add a player to the roster</h2>
-        <form action="/players" method="POST">
-        <input class="form-control form-control-lg" type="text" placeholder="First Name" name="FirstName" size="50" />
-        <br>
-        <input class="form-control form-control-lg" type="text" placeholder="Last Name" name="LastName" />
-        <br>
-        <!-- gYear is the graduation year. -->
-        <input class="form-control form-control-lg" type="number" placeholder="Graduation Year" name="GradYear" size="50" />
-        <br> 
-        <input class="form-control form-control-lg" type="text" placeholder="Position" name="Pos" size="50" />
-
-        <button type="submit" class="btn btn-primary" >Submit</button>
-        </form>
+    <!-- Side navigation -->
+    <div class="sidenav">
+      <a href="coachHome.html">Home</a>
+      <button class="dropdown-btn">Roster<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-container">
+        <a href="#">Player Bio</a>
+        <a href="#">Depth Chart</a>
+      </div>
+      <button class="dropdown-btn">Game<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-container">
+        <a href="#">Game Stats</a>
+        <a href="#">Game Grade</a>
+        <a href="#">Analysis</a>
+      </div>
+      <button class="dropdown-btn">Practice<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-container">
+        <a href="#">In Season</a>
+        <a href="#">Training</a>
+      </div>
+      <a href="#">Player Feedback</a>
+      <a href="#">Comparison</a>
     </div>
+    <div class="main">
+      <!-- <h3 class="text"><center>Roster</center></h3> -->
+      <!-- <img src="coachToolsLogo.png" alt="CoachTools" style="display:inline"> -->
+      <div style="text-align: center; padding-top: 70px;">
+        <img src="https://gettysburgsports.com/images/2014/4/14/Bullets_Homepage.jpg?preset=large.socialmediaimage" alt="Gettysburg College Football" width="200">
+      </div>
+      <br>
 
-    <h2> <center>Gettysburg College Football Roster  </center></h2>
+      <h2 class="text">Gettysburg College Football Roster</h2>
 
-    <div class="form-group">
-        <form action = "/table" method = "POST">
-            <button type="submit" class="btn btn-primary" name= "type" value = "full">View Whole Roster</button>
-            <button type="submit" class="btn btn-primary" name= "type" value = "qb">View Quartberbacks</button>
-            <button type="submit" class="btn btn-primary" name= "type" value = "wr">View Wide Receivers</button>
-            <button type="submit" class="btn btn-primary" name= "type" value = "k">View Kickers</button>
-            <button type="submit" class="btn btn-primary" name= "type" value = "lb">View Linebackers</button>
-            <button type="submit" class="btn btn-primary" name= "type" value = "gy">Sort By Graduation Year (Ascending)</button>
-            <button type="submit" class="btn btn-primary" name= "type" value = "gyd">Sort By Graduation Year (Descending)</button>
+      <div class="form-group text">
+          <form action = "/table" method = "POST">
+              <button type="submit" class="btn btn-primary" name= "type" value = "full">View Whole Roster</button>
+              <button type="submit" class="btn btn-primary" name= "type" value = "qb">View Quartberbacks</button>
+              <button type="submit" class="btn btn-primary" name= "type" value = "wr">View Wide Receivers</button>
+              <button type="submit" class="btn btn-primary" name= "type" value = "k">View Kickers</button>
+              <button type="submit" class="btn btn-primary" name= "type" value = "lb">View Linebackers</button>
+              <button type="submit" class="btn btn-primary" name= "type" value = "gy">Sort By Graduation Year (Ascending)</button>
+              <button type="submit" class="btn btn-primary" name= "type" value = "gyd">Sort By Graduation Year (Descending)</button>
 
-        </form>
-        </div>
-
-    <table class="table table-hover">
-        <thead>
-          <tr class = "table-dark">
-            <th scope="col">Name</th>
-            <th scope="col">Position</th>
-            <th scope="col">Graduation Year</th>
-          </tr>
-        </thead>
-        <tbody>
-            <ul class="players">
-                <% for(var i = 0; i < players.length; i++) {%>
-                    <tr class="table-default">
-                    <td><%= players[i].FirstName %> <%= players[i].LastName %></td>
-                    <td><%= players[i].Pos %></td>
-                    <td><%= players[i].GradYear %></td>
-                    </tr>
-                <% } %>
-            </ul>
-         
-        </tbody>
-      </table> 
-
-    <div>
-        <h2>Update a player's information</h2>
-        <p>
-          Change the position of a player. 
-        </p>
-        
-        
-        <form action="/update" method="POST">
-
-            <input type="text" placeholder="Player First Name" name="FirstName" id = "fname" />
-            <input type="text" placeholder="New position" name="Pos" id = "pos" />
-            <button id="update-button">Update player position</button>
           </form>
-
-
       </div>
 
-      <div>
-        <h2>Remove Darth Vadar!</h2>
-        <p>
-          Delete one Darth Vadar's quote. Does nothing if there are no more Darth
-          Vadar's quote
-        </p>
-        <button id="delete-button">Delete Darth Vadar's quote</button>
+      <table class="table text1"> <!-- table-hover -->
+          <thead>
+            <tr class = "table-dark">
+              <th scope="col">Name</th>
+              <th scope="col">Position</th>
+              <th scope="col">Graduation Year</th>
+            </tr>
+          </thead>
+          <tbody>
+              <ul class="players text">
+                  <% for(var i = 0; i < players.length; i++) {%>
+                      <tr class="table-default">
+                      <td><%= players[i].FirstName %> <%= players[i].LastName %></td>
+                      <td><%= players[i].Pos %></td>
+                      <td><%= players[i].GradYear %></td>
+                      </tr>
+                  <% } %>
+              </ul>
+          
+          </tbody>
+        </table> 
+      <div class="form-group text">
+          <h2 class="text"> Add a player to the roster</h2>
+          <form action="/players" method="POST">
+            <input class="form-control form-control-lg" type="text" placeholder="First Name" name="FirstName" size="50" />
+            <br>
+            <input class="form-control form-control-lg" type="text" placeholder="Last Name" name="LastName" />
+            <br>
+            <!-- gYear is the graduation year. -->
+            <input class="form-control form-control-lg" type="number" placeholder="Graduation Year" name="GradYear" size="50" />
+            <br> 
+            <input class="form-control form-control-lg" type="text" placeholder="Position" name="Pos" size="50" />
+
+            <button type="submit" class="btn btn-primary" >Submit</button>
+          </form>
       </div>
-      <div id="message"></div>
-      <script src="/main.js"></script>
+      <div class="text">
+          <h2 class="text">Update a player's information</h2>
+          <p>
+            Change the position of a player. 
+          </p>
+          
+          <form action="/update" method="POST">
+
+              <input type="text" placeholder="Player First Name" name="FirstName" id = "fName" />
+              <input type="text" placeholder="Player Last Name" name="LastName" id = "lName" />
+              <input type="text" placeholder="New position" name="Pos" id = "pos" />
+              <button id="btn btn-primary">Update player position</button>
+            </form>
+      </div>
+        <!-- <div>
+          <h2>Remove Darth Vadar!</h2>
+          <p>
+            Delete one Darth Vadar's quote. Does nothing if there are no more Darth
+            Vadar's quote
+          </p>
+          <button id="delete-button">Delete Darth Vadar's quote</button>
+        </div> -->
+        <div id="message"></div>
+        <script src="/main.js"></script>
+    </div>
+    <script>
+      /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
       
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+        } else {
+        dropdownContent.style.display = "block";
+        }
+        });
+      }
+    </script>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <!-- <script src="../vendors/js/vendor.bundle.base.js"></script> -->
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- <script src="../vendors/chart.js/Chart.min.js"></script> -->
+    <!-- <script src="../vendors/moment/moment.min.js"></script> -->
+    <!-- <script src="../vendors/daterangepicker/daterangepicker.js"></script> -->
+    <!-- <script src="../vendors/chartist/chartist.min.js"></script> -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="../js/off-canvas.js"></script> -->
+    <!-- <script src="../js/misc.js"></script> -->
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <!-- <script src="../js/dashboard.js"></script> -->
+    <!-- End custom js for this page -->    
   </body>
 
   
