@@ -1,17 +1,17 @@
-console.log('May Node be with you');
+console.log('CoachTools Starting');
 
 const MongoClient = require('mongodb').MongoClient
 const express = require('express');
 const uri = "mongodb+srv://hernri01:Capstone2020@cluster0.3ln2m.mongodb.net/test?authSource=admin&replicaSet=atlas-9q0n4l-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true&useUnifiedTopology=true";
-const bodyParser= require('body-parser'); //Parses the CVS (excel) file.
+const bodyParser= require('body-parser');
 const app = express();
-var fileUpload = require('express-fileupload'); //Upload files. 
-var mongoose = require('mongoose'); //This is for MongoDB Schemas.
-var Roster = require('./roster.js'); //This is the Roster schema that will be used in the code. 
+var fileUpload = require('express-fileupload');
+var mongoose = require('mongoose');
+var Roster = require('./roster.js');
 const csv = require('fast-csv');
 
 
-//This is for uploading the files. It is necessary for parsing and getting data.
+
 const multer = require('multer');
 const upload = multer({
     dest: 'uploads/' // this saves your file into a directory called "uploads"
@@ -35,18 +35,13 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
     app.listen(3000, function() {
         console.log('listening on 3000')
     })
-    
-    app.use(fileUpload()); //Will use the npm package to upload a file.
-    
-    //This will connect to the database so that things can be added.
+
+    app.use(fileUpload());
     mongoose.connect('mongodb+srv://hernri01:Capstone2020@cluster0.3ln2m.mongodb.net/test?authSource=admin&replicaSet=atlas-9q0n4l-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true&useUnifiedTopology=true&useNewUrlParser=true');
 
-    //This is the template that will be used for Coaches to get a template of how we want the excel file to be formatted. 
-    var template = require('./template.js'); 
+    var template = require('./template.js');
     app.get('/template', template.get);
-    
-    
-    //This will upload a file to the Database and redirect to the same page. 
+        
     app.post('/upload', (req,res) => 
     {
         if (!req.files)
@@ -70,7 +65,7 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
                 if (err) throw err;
             });
                     // Sorting by the position Alhpabetically.
-            res.redirect('/'); //Redirecting to the home page, but can be changed to whatever. 
+            res.redirect('/coachHome.html');
         });
         
     })
@@ -87,9 +82,25 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
 
     })
 
+    // app.get('/coachHome.html', (req, res) => //This is the same as function(req,res)
+    // {
+    //     // Sorting by the position Alhpabetically.
+    //     db.collection('Roster').find({ "Pos": { "$exists": true } }).sort({'Pos': 1}).toArray()
+    //     .then(results => {
+    //         res.render('index.ejs', {players: results})
+    //     })
+    //     .catch(error => console.error(error))
+
+    // })
+
     app.get('/home.html', (req, res) => 
     {
         res.sendFile('D:/RicardoCrudTutorial/home.html')
+    })
+
+    app.get('/index.ejs', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/views/index.ejs')
     })
 
     app.get('/coachHome.html', (req, res) => 
@@ -119,7 +130,12 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
 
     app.get('/coachToolsLogo.png', (req, res) => 
     {
-        res.sendFile('D:/RicardoCrudTutorial/views/coachToolsLogo.png')
+        res.sendFile('D:/RicardoCrudTutorial/images/coachToolsLogo.png')
+    })
+
+    app.get('/nav.html', (req, res) => 
+    {
+        res.sendFile('D:/RicardoCrudTutorial/nav.html')
     })
 
     app.post('/table', (req,res) => 
