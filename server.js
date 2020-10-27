@@ -3,8 +3,20 @@ console.log('May Node be with you');
 const MongoClient = require('mongodb').MongoClient
 const express = require('express');
 const uri = "mongodb+srv://hernri01:Capstone2020@cluster0.3ln2m.mongodb.net/test?authSource=admin&replicaSet=atlas-9q0n4l-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true&useUnifiedTopology=true";
-const bodyParser= require('body-parser');
+const bodyParser= require('body-parser'); //Parses the CVS (excel) file.
 const app = express();
+var fileUpload = require('express-fileupload'); //Upload files. 
+var mongoose = require('mongoose'); //This is for MongoDB Schemas.
+var Roster = require('./roster.js'); //This is the Roster schema that will be used in the code. 
+const csv = require('fast-csv');
+
+
+//This is for uploading the files. It is necessary for parsing and getting data.
+const multer = require('multer');
+const upload = multer({
+    dest: 'uploads/' // this saves your file into a directory called "uploads"
+  }); 
+  
 
 // Make sure that the bodyparser comes before the GET and POST functions.
 MongoClient.connect(uri, { useUnifiedTopology: true })
@@ -22,6 +34,45 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
     // Will create a browser that the computer can connect to. 
     app.listen(3000, function() {
         console.log('listening on 3000')
+    })
+    
+    app.use(fileUpload()); //Will use the npm package to upload a file.
+    
+    //This will connect to the database so that things can be added.
+    mongoose.connect('mongodb+srv://hernri01:Capstone2020@cluster0.3ln2m.mongodb.net/test?authSource=admin&replicaSet=atlas-9q0n4l-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true&useUnifiedTopology=true&useNewUrlParser=true');
+
+    //This is the template that will be used for Coaches to get a template of how we want the excel file to be formatted. 
+    var template = require('./template.js'); 
+    app.get('/template', template.get);
+    
+    
+    //This will upload a file to the Database and redirect to the same page. 
+    app.post('/upload', (req,res) => 
+    {
+        if (!req.files)
+           return res.status(400).send('No files were uploaded.');
+        
+        var rosterFile = req.files.file;
+
+        var players = [];
+            
+        csv.parseString(rosterFile.data.toString(), {
+            headers: true,
+            ignoreEmpty: true
+        })
+        .on("data", function(data){
+            data['_id'] = new mongoose.Types.ObjectId();
+            
+            players.push(data);
+        })
+        .on("end", function(){
+            Roster.create(players, function(err, documents) {
+                if (err) throw err;
+            });
+                    // Sorting by the position Alhpabetically.
+            res.redirect('/'); //Redirecting to the home page, but can be changed to whatever. 
+        });
+        
     })
 
     // Reading something. Getting information 
@@ -175,43 +226,6 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
         })
         .catch(error => console.error(error))
     })
-
-    app.put('/quotes', (req, res) => {
-        // console.log(req.body)
-
-        quotesCollection.findOneAndUpdate(
-            { name: 'Yoda' },
-            {
-              $set: {
-                name: req.body.name,
-                quote: req.body.quote
-              }
-            },
-            {
-              upsert: true
-            }
-        )
-        .then(result => {
-            res.json('Success')
-        })
-        .catch(error => console.error(error))
-
-    })
-
-    // Deleting a quote. Specifically from Darth Vader
-    app.delete('/quotes', (req, res) => {
-        // Handle delete event here
-        quotesCollection.deleteOne(
-            { name: req.body.name },
-          )
-          .then(result => {
-            if (result.deletedCount === 0) {
-                return res.json('No quote to delete')
-            }
-            res.json(`Deleted Darth Vadar's quote`)
-          })
-          .catch(error => console.error(error))
-      })
 })
 
 .catch(console.error)
