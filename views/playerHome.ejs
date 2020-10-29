@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <!-- <title>Star Wars Quote App</title> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Coach Tools</title>
+    <!-- plugins:css -->
+    <!-- <link rel="stylesheet" href="../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css"> -->
+    <link rel="stylesheet" href="../public/styles.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- <link rel="stylesheet" href="../vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../vendors/chartist/chartist.min.css"> -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <!-- End layout styles -->
+    <!-- <link rel="shortcut icon" href="../images/coachToolsLogo.png" /> -->
+    <style>
+    body {
+      background-color: aliceblue;
+    }
+    .sidenav {
+      height: 100%; /* Full-height: remove this if you want "auto" height */
+      width: 160px; /* Set the width of the sidebar */
+      position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+      /* z-index: -1; Stay on top */
+      top: 40px; /*Stay at the top */
+      left: 0;
+      background-color: #111; /* Black */
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 20px;
+    }
+    /* The navigation menu links */
+    .sidenav a, .dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+    .top-dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display:inline;
+      border: none;
+      background: none;
+      text-align: right;
+      cursor: pointer;
+      outline: none;
+    }
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover, .dropdown-btn:hover {
+      color: #f1f1f1;
+    }
+    .topnav {
+      position: fixed;
+      width: 100%;
+      height: fit-content;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      overflow: hidden;
+      background-color: #111;
+    }
+    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+      display: none;
+      background-color: #262626;
+      padding-left: 8px;
+    }
+    /* Optional: Style the caret down icon */
+    .fa-caret-down {
+      float: right;
+      padding-right: 8px;
+    }
+    /* Style page content */
+    .main {
+      margin-left: 160px; /* Same as the width of the sidebar */
+      padding: 0px 10px;
+    }
+    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+    .text, .text1 {
+      color: black;
+    }
+    .text ul:hover {
+      color: blue;
+    }
+    </style>
+    <!-- header -->
+    <div class="topnav">
+      <img src="coachToolsLogo.png" alt="CoachTools" style="display:inline; width: 75px;">
+      <div style="font-size: 25px; display: inline;">CoachTools</div>
+      <button class="top-dropdown-btn"><%= name %></button>
+      <div style="display: inline; text-align: right;">
+        <button class="top-dropdown-btn" onclick="window.location.href='/users/playerlogin'">Logout</button>
+      </div>
+    </div>
+  </head>
+
+  <body>
+    <h3 style="padding-top: 60px; padding-left: 200px; color: black;">Home</h3>
+    <!-- Side navigation -->
+    <div class="sidenav">
+      <a href="playerHome.ejs">Home</a>
+      <a href="./users/grades">My Grades</a>
+      <a href="#">My Trends</a>
+    </div>
+
+    <div class="row" style="padding-top: 50px; padding-left: 200px;">
+      <div class="btn-group" style="padding: 10px;">
+        <button type="button" class="btn btn-primary dropdown-toggle" style="color:black; background-color: gray; border-color: gray;" data-toggle="dropdown">Team Name</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item">Gettysburg 2018</a>
+          <a class="dropdown-item">Gettysburg 2019</a>
+          <a class="dropdown-item">Gettysburg 2020</a>
+        </div>
+      </div>
+      <div class="btn-group" style="padding: 10px;">
+        <button type="button" class="btn btn-primary dropdown-toggle" style="color:black; background-color: gray; border-color: gray;" data-toggle="dropdown">Team</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item">Offense</a>
+          <a class="dropdown-item">Defense</a>
+          <a class="dropdown-item">Special Teams</a>
+        </div>
+      </div>
+      <div class="btn-group" style="padding: 10px;">
+        <button type="button" class="btn btn-primary btn-fw" style="color:black; background-color: gray; border-color: gray;">Add Team</button>
+      </div>
+    </div>
+
+    <script>
+      /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+      
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+        } else {
+        dropdownContent.style.display = "block";
+        }
+        });
+      }
+    </script>  
+  </body>
+</html>
