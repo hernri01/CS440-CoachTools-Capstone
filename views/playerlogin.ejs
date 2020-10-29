@@ -1,9 +1,9 @@
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <div class="card card-body">
-        <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> Coach Login</h1>
+        <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i> Player Login</h1>
         <%- include('./partials/messages'); %>
-        <form action="/users/login" method="POST">
+        <form action="/users/playerlogin" method="POST">
           <div class="form-group">
             <label for="email">Email</label>
             <input
@@ -27,8 +27,8 @@
           <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
         <p class="lead mt-4">
-          Not a Coach? <a href="/users/playerlogin">Player Login</a>
-        </p>
+            No a player? <a href="/users/login">Coach Login</a>
+          </p>
         <p class="lead mt-4">
           No Account? <a href="/users/register">Register</a>
         </p>

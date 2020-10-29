@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <!-- <title>Star Wars Quote App</title> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cyborg/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Coach Tools</title>
+    <!-- plugins:css -->
+    <!-- <link rel="stylesheet" href="../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css"> -->
+    <link rel="stylesheet" href="../public/styles.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- <link rel="stylesheet" href="../vendors/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="../vendors/chartist/chartist.min.css"> -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
+    <!-- End layout styles -->
+    <!-- <link rel="shortcut icon" href="../images/coachToolsLogo.png" /> -->
+    <style>
+    body {
+      background-color: aliceblue;
+    }
+    .sidenav {
+      height: 100%; /* Full-height: remove this if you want "auto" height */
+      width: 160px; /* Set the width of the sidebar */
+      position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+      /* z-index: -1; Stay on top */
+      top: 40px; /*Stay at the top */
+      left: 0;
+      background-color: #111; /* Black */
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 20px;
+    }
+
+    /* The navigation menu links */
+    .sidenav a, .dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .top-dropdown-btn {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display:inline;
+      border: none;
+      background: none;
+      text-align: right;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover, .dropdown-btn:hover {
+      color: #f1f1f1;
+    }
+
+    .topnav {
+      position: fixed;
+      width: 100%;
+      height: fit-content;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      overflow: hidden;
+      background-color: #111;
+    }
+
+    /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+    .dropdown-container {
+      display: none;
+      background-color: #262626;
+      padding-left: 8px;
+    }
+
+    /* Optional: Style the caret down icon */
+    .fa-caret-down {
+      float: right;
+      padding-right: 8px;
+    }
+
+    /* Style page content */
+    .main {
+      margin-left: 160px; /* Same as the width of the sidebar */
+      padding: 0px 10px;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+
+    .text, .text1 {
+      color: black;
+    }
+
+    .text ul:hover {
+      color: blue;
+    }
+    </style>
+    <!-- header -->
+    <div class="topnav">
+      <img src="coachToolsLogo.png" alt="CoachTools" style="display:inline; width: 75px;">
+      <div style="font-size: 25px; display: inline;">CoachTools</div>
+      <button class="top-dropdown-btn">Welcome Coach <%= name %></button>
+      <div style="display: inline; text-align: right;">
+        <button class="top-dropdown-btn" onclick="window.location.href='/users/logout'">Logout</button>
+      </div>
+    </div>
+  </head>
+
+  <body>
+    <h3 style="padding-top: 60px; padding-left: 200px; color: black;">Home</h3>
+    <!-- Side navigation -->
+    <!-- <a href="nav.html">htmlpage</a> -->
+    <!-- <iframe src ="nav.html" width = "100%"><p>alt text</p></iframe>  -->
+    <div id="nav-placeholder"></div>
+    <!-- <div class="sidenav">
+      <a href="coachHome.html">Home</a>
+      <button class="dropdown-btn">Roster<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-container">
+        <a href="/index.ejs">Player Bio</a>
+        <a href="#">Depth Chart</a>
+      </div>
+      <button class="dropdown-btn">Game<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-container">
+        <a href="#">Game Stats</a>
+        <a href="#">Game Grade</a>
+        <a href="#">Analysis</a>
+      </div>
+      <button class="dropdown-btn">Practice<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-container">
+        <a href="#">In Season</a>
+        <a href="#">Training</a>
+      </div>
+      <a href="#">Player Feedback</a>
+      <a href="#">Comparison</a>
+    </div> -->
+
+    <div class="row" style="padding-top: 25px; padding-left: 200px;">
+      <div class="btn-group" style="padding: 10px;">
+        <button class="dropdown-btn" style="color:black; background-color: gray; border-color: gray;" data-toggle="dropdown">Team Name</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item">Gettysburg 2018</a>
+          <a class="dropdown-item">Gettysburg 2019</a>
+          <a class="dropdown-item">Gettysburg 2020</a>
+        </div>
+      </div>
+      <div class="btn-group" style="padding: 10px;">
+        <button type="button" class="dropdown-btn" style="color:black; background-color: gray; border-color: gray;" data-toggle="dropdown">Team</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item">Offense</a>
+          <a class="dropdown-item">Defense</a>
+          <a class="dropdown-item">Special Teams</a>
+        </div>
+      </div>
+      <div class="btn-group" style="padding: 10px;">
+        <button type="button" class="btn btn-primary btn-fw" style="color:black; background-color: gray; border-color: gray;">Add Team</button>
+      </div>
+              <!-- This is the upload excel roster button. -->
+      <p>Use the form below to upload a list of authors.
+      Click <a href="/template">here</a> for an example template.</p>
+      <form action="/upload" method="POST" encType="multipart/form-data">
+        <input type="file" name="file" accept=".csv" /><br/><br/>
+        <input type="submit" value="Upload Roster" />
+      </form>
+    </div>
+
+    <div class="row" style="padding-top: 25px; padding-left: 200px; padding-bottom: 10px; text-align: center; width: 100%;">
+      <DIV class="col-md-1" style="border: 1px solid black; padding: 10px; font-size: 20pt;">Offense</DIV>
+    </div>
+    <div class="row" style="padding-left: 200px; text-align: center;">
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">WR<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">WR<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">LT<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">LG<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">C<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">RG<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">RT<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">TE<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">WR<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">QB<p>Name, GR</p></DIV>
+      <DIV style="border: 1px solid black; border-radius: 50%; padding: 10px;;">RB<p>Name, GR</p></DIV>
+    </div>
+
+    <!-- <div class="row" style="padding-top: 25px; padding-left: 200px; padding-bottom: 10px;">
+      <DIV class="col-md-1" style="border: 1px solid black; padding: 10px;;">Defense</DIV>
+    </div>
+    <div class="row" style="padding-top: 25px; padding-left: 200px;">
+      <DIV class="col-md-1" style="border: 1px solid black; padding: 10px;;">Special Teams</DIV>
+    </div> -->
+
+    <script>
+      /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+      
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+        } else {
+        dropdownContent.style.display = "block";
+        }
+        });
+      }
+
+      $(function(){
+        $("#nav-placeholder").load("nav.html");
+      });
+    </script>  
+  </body>
+</html>

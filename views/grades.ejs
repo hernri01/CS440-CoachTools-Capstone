@@ -1,0 +1,21 @@
+<h1 class="mt-4">Grades Homepage</h1>
+
+<p>Today's Date: <span id="datetime"></span></p>
+<script>
+var dt = new Date();
+document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (("0"+dt.getDate()).slice(-2)) +"/"+ (dt.getFullYear());
+</script>
+
+<table style="width:100%">
+    <tr>
+      <th>Today's Grade</th>
+      <th>Weekly Grade Trend</th> 
+      <th>Seasonal Grade Trend</th>
+    </tr>
+    <tr>
+      <td>90</td>
+      <td>+20</td> 
+      <td>+10</td>
+    </tr>
+</table>
+<a href="/playerHome" class="btn btn-secondary">Player Home</a>
